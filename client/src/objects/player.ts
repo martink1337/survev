@@ -39,7 +39,6 @@ import { device } from "../device";
 import { errorLogManager } from "../errorLogs";
 import type { Ctx } from "../game";
 import { helpers } from "../helpers";
-import { InputHandler } from "../input";
 import type { SoundHandle } from "../lib/createJS";
 import type { Map } from "../map";
 import type { Renderer } from "../renderer";
@@ -57,7 +56,7 @@ import type { Obstacle } from "./obstacle";
 import type { Emitter, ParticleBarn } from "./particles";
 import { halloweenSpriteMap } from "./projectile";
 import { createCasingParticle } from "./shot";
-const inputManager = new InputHandler(document.body);
+import type { InputHandler } from "../input";
 
 const submergeMaskScaleFactor = 0.1;
 
@@ -790,6 +789,7 @@ export class Player implements AbstractObject {
         activeId: number,
         preventInput: boolean,
         displayingStats: boolean,
+        inputManager: InputHandler,
         isSpectating: boolean,
     ) {
         const curWeapDef = GameObjectDefs[this.m_netData.m_activeWeapon];
@@ -1262,7 +1262,7 @@ export class Player implements AbstractObject {
 
         this.updateAura(dt, isActivePlayer, activePlayer);
 
-        this.Zr(camera);
+        this.Zr(camera, inputManager);
 
         // @NOTE: There's an off-by-one frame issue for effects spawned earlier
         // in this frame that reference renderLayer / zOrd / zIdx. This issue is
@@ -1793,7 +1793,7 @@ export class Player implements AbstractObject {
         }
     }
 
-    Zr(camera: Camera) {
+    Zr(camera: Camera, inputManager: InputHandler) {
         const e = function (e: PIXI.Container, t: Pose) {
             e.position.set(t.pos.x, t.pos.y);
             e.pivot.set(-t.pivot.x, -t.pivot.y);
@@ -2516,6 +2516,7 @@ export class PlayerBarn {
         ui2Manager: UiManager2,
         preventInput: boolean,
         displayingStats: boolean,
+        inputManager: InputHandler,  
         isSpectating?: boolean,
     ) {
         // Update players
@@ -2536,6 +2537,7 @@ export class PlayerBarn {
                     activeId,
                     preventInput,
                     displayingStats,
+                    inputManager,
                     isSpectating!,
                 );
             }

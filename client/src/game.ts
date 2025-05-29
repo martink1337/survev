@@ -423,6 +423,7 @@ export class Game {
             this.m_ui2Manager,
             this.m_emoteBarn.wheelKeyTriggered,
             this.m_uiManager.displayingStats,
+            this.m_input,
             this.m_spectating,
         );
         this.updateAmbience();
