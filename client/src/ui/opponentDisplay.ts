@@ -15,6 +15,7 @@ import type { ConfigManager, DebugOptions } from "../config";
 import { debugLines } from "../debugLines";
 import { device } from "../device";
 import type { Game } from "../game";
+import type { InputHandler } from "../input";
 import type { InputBinds } from "../inputBinds";
 import { Map } from "../map";
 import { DecalBarn } from "../objects/decal";
@@ -24,7 +25,6 @@ import { type Player, PlayerBarn } from "../objects/player";
 import { SmokeBarn } from "../objects/smoke";
 import { Renderer } from "../renderer";
 import type { LocalDataWithDirty } from "./../../../shared/net/updateMsg";
-import type { InputHandler } from "../input";
 
 export class LoadoutDisplay {
     active = false;
@@ -436,10 +436,10 @@ export class LoadoutDisplay {
         }
 
         const ui2Manager = undefined;
-        const preventInput = false
+        const preventInput = false;
         const displayingStats = false;
         const isSpectating = false;
-        
+
         this.playerBarn.m_update(
             dt,
             this.activeId,
@@ -455,7 +455,7 @@ export class LoadoutDisplay {
             displayingStats,
             inputManager,
             isSpectating,
-        );  
+        );
         this.smokeBarn.m_update(
             dt,
             this.camera,

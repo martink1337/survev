@@ -39,6 +39,7 @@ import { device } from "../device";
 import { errorLogManager } from "../errorLogs";
 import type { Ctx } from "../game";
 import { helpers } from "../helpers";
+import type { InputHandler } from "../input";
 import type { SoundHandle } from "../lib/createJS";
 import type { Map } from "../map";
 import type { Renderer } from "../renderer";
@@ -56,7 +57,6 @@ import type { Obstacle } from "./obstacle";
 import type { Emitter, ParticleBarn } from "./particles";
 import { halloweenSpriteMap } from "./projectile";
 import { createCasingParticle } from "./shot";
-import type { InputHandler } from "../input";
 
 const submergeMaskScaleFactor = 0.1;
 
@@ -389,7 +389,7 @@ export class Player implements AbstractObject {
 
     isSpectating!: boolean;
     activeId!: number;
-    
+
     constructor() {
         this.bodySprite.addChild(this.bodySubmergeSprite);
         this.handLSprite.addChild(this.handLSubmergeSprite);
@@ -1819,13 +1819,21 @@ export class Player implements AbstractObject {
         const mouseY = inputManager.mousePos.y;
         const mouseX = inputManager.mousePos.x;
         //local rotation
-        if (this.activeId == this.__id && !this.isSpectating && device.mobile == false && camera.m_localrotationEnabled) {
-        this.bodyContainer.rotation = Math.atan2(
-            mouseY - window.innerHeight / 2,
-            mouseX - window.innerWidth / 2,
-        );
+        if (
+            this.activeId == this.__id &&
+            !this.isSpectating &&
+            device.mobile == false &&
+            camera.m_localrotationEnabled
+        ) {
+            this.bodyContainer.rotation = Math.atan2(
+                mouseY - window.innerHeight / 2,
+                mouseX - window.innerWidth / 2,
+            );
         } else {
-        this.bodyContainer.rotation = -Math.atan2(this.m_visualDir.y, this.m_visualDir.x);
+            this.bodyContainer.rotation = -Math.atan2(
+                this.m_visualDir.y,
+                this.m_visualDir.x,
+            );
         }
     }
 
@@ -2518,7 +2526,7 @@ export class PlayerBarn {
         ui2Manager: UiManager2,
         preventInput: boolean,
         displayingStats: boolean,
-        inputManager: InputHandler,  
+        inputManager: InputHandler,
         isSpectating?: boolean,
     ) {
         // Update players

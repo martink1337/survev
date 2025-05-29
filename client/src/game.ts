@@ -410,7 +410,7 @@ export class Game {
         if (this.m_playing) {
             this.m_playingTicker += dt;
         }
-        this.m_playerBarn.m_update( 
+        this.m_playerBarn.m_update(
             dt,
             this.m_activeId,
             this.m_renderer,
