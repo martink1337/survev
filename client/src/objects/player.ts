@@ -387,6 +387,9 @@ export class Player implements AbstractObject {
     dead!: boolean;
     gunSwitchCooldown!: number;
 
+    isSpectating!: boolean;
+    activeId!: number;
+    
     constructor() {
         this.bodySprite.addChild(this.bodySubmergeSprite);
         this.handLSprite.addChild(this.handLSubmergeSprite);
@@ -2506,7 +2509,6 @@ export class PlayerBarn {
     m_update(
         dt: number,
         activeId: number,
-        _r: unknown,
         renderer: Renderer,
         particleBarn: ParticleBarn,
         camera: Camera,

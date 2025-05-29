@@ -881,7 +881,7 @@ class Application {
                     this.loadoutDisplay.init();
                 }
                 this.loadoutDisplay.show();
-                this.loadoutDisplay.update(dt, this.hasFocus);
+                this.loadoutDisplay.update(dt, this.hasFocus, this.input!);
             } else {
                 this.loadoutDisplay.hide();
             }

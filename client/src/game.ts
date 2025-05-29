@@ -410,10 +410,9 @@ export class Game {
         if (this.m_playing) {
             this.m_playingTicker += dt;
         }
-        this.m_playerBarn.m_update(
+        this.m_playerBarn.m_update( 
             dt,
             this.m_activeId,
-            this.teamMode,
             this.m_renderer,
             this.m_particleBarn,
             this.m_camera,
