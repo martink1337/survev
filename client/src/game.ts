@@ -337,6 +337,7 @@ export class Game {
 
         // Process config
         this.m_camera.m_setShakeEnabled(this.m_config.get("screenShake")!);
+        this.m_camera.m_setLocalrotationEnabled(this.m_config.get("localRotation")!);
         this.m_camera.m_setInterpEnabled(this.m_config.get("interpolation")!);
         this.m_playerBarn.anonPlayerNames = this.m_config.get("anonPlayerNames")!;
         this.initialized = true;
@@ -422,6 +423,7 @@ export class Game {
             this.m_ui2Manager,
             this.m_emoteBarn.wheelKeyTriggered,
             this.m_uiManager.displayingStats,
+            this.m_input,
             this.m_spectating,
         );
         this.updateAmbience();
